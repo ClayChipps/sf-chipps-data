@@ -1,0 +1,32 @@
+[
+  {
+    "alias": [],
+    "command": "chipps:package:dependencies:install",
+    "flagAliases": [],
+    "flagChars": ["a", "b", "i", "k", "l", "n", "r", "s", "t", "v", "w", "z"],
+    "flags": [
+      "apex-compile",
+      "branch",
+      "install-type",
+      "installation-key",
+      "json",
+      "no-prompt",
+      "publish-wait",
+      "security-type",
+      "skip-handlers",
+      "target-dev-hub",
+      "target-org",
+      "upgrade-type",
+      "wait"
+    ],
+    "plugin": "sf-chipps-package"
+  },
+  {
+    "alias": [],
+    "command": "chipps:package:version:cleanup",
+    "flagAliases": [],
+    "flagChars": ["p", "s", "v"],
+    "flags": ["api-version", "json", "matcher", "package", "target-dev-hub"],
+    "plugin": "sf-chipps-package"
+  }
+]

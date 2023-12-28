@@ -1,0 +1,205 @@
+{
+  "name": "sf-chipps-data",
+  "description": "Utilities for working with data",
+  "version": "0.1.0",
+  "author": "@ClayChipps",
+  "bugs": "https://github.com/ClayChipps/sf-chipps-data/issues",
+  "dependencies": {
+    "@oclif/core": "^3.15.0",
+    "@salesforce/core": "^6.1.3",
+    "@salesforce/kit": "^3.0.15",
+    "@salesforce/sf-plugins-core": "^5.0.13",
+    "csv-parse": "^5.5.3",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "@oclif/plugin-command-snapshot": "^5.0.2",
+    "@salesforce/cli-plugins-testkit": "^5.1.2",
+    "@salesforce/dev-scripts": "^7.1.1",
+    "@salesforce/plugin-command-reference": "^3.0.51",
+    "@salesforce/ts-sinon": "1.4.19",
+    "@types/shelljs": "^0.8.14",
+    "eslint-plugin-sf-plugin": "^1.16.15",
+    "moment": "^2.29.1",
+    "oclif": "^4.0.4",
+    "shelljs": "^0.8.5",
+    "shx": "0.3.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "/lib",
+    "/messages",
+    "/oclif.manifest.json",
+    "/oclif.lock"
+  ],
+  "homepage": "https://github.com/ClayChipps/sf-chipps-data",
+  "keywords": [
+    "force",
+    "salesforce",
+    "sfdx",
+    "salesforcedx",
+    "sfdx-plugin",
+    "sf-plugin",
+    "sf"
+  ],
+  "license": "MIT",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "sf",
+    "devPlugins": [
+      "@oclif/plugin-command-snapshot",
+      "@oclif/plugin-help",
+      "@salesforce/plugin-command-reference"
+    ],
+    "topics": {
+      "chipps": {
+        "description": "description for chipps",
+        "subtopics": {
+          "data": {
+            "description": "description for chipps.data",
+            "subtopics": {
+              "files": {
+                "description": "description for chipps.data.files"
+              }
+            }
+          }
+        }
+      }
+    },
+    "flexibleTaxonomy": true,
+    "topicSeparator": " "
+  },
+  "repository": "ClayChipps/sf-chipps-data",
+  "scripts": {
+    "build": "wireit",
+    "clean": "sf-clean",
+    "clean-all": "sf-clean all",
+    "clean:lib": "shx rm -rf lib && shx rm -rf coverage && shx rm -rf .nyc_output && shx rm -f oclif.manifest.json oclif.lock",
+    "compile": "wireit",
+    "docs": "sf-docs",
+    "format": "wireit",
+    "lint": "wireit",
+    "postpack": "shx rm -f oclif.manifest.json oclif.lock",
+    "prepack": "sf-prepack",
+    "prepare": "sf-install",
+    "test": "wireit",
+    "test:nuts": "nyc mocha \"**/*.nut.ts\" --slow 4500 --timeout 1200000 --parallel --jobs 5",
+    "test:only": "wireit",
+    "test:watch": "mocha --watch \"./test/**/*.test.ts\"",
+    "version": "oclif readme"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "wireit": {
+    "build": {
+      "dependencies": [
+        "compile",
+        "lint"
+      ]
+    },
+    "compile": {
+      "command": "tsc -p . --pretty --incremental",
+      "files": [
+        "src/**/*.ts",
+        "**/tsconfig.json",
+        "messages/**"
+      ],
+      "output": [
+        "lib/**",
+        "*.tsbuildinfo"
+      ],
+      "clean": "if-file-deleted"
+    },
+    "format": {
+      "command": "prettier --write \"+(src|test|schemas)/**/*.+(ts|js|json)|command-snapshot.json\"",
+      "files": [
+        "src/**/*.ts",
+        "test/**/*.ts",
+        "schemas/**/*.json",
+        "command-snapshot.json",
+        ".prettier*"
+      ],
+      "output": []
+    },
+    "lint": {
+      "command": "eslint src test --color --cache --cache-location .eslintcache",
+      "files": [
+        "src/**/*.ts",
+        "test/**/*.ts",
+        "messages/**",
+        "**/.eslint*",
+        "**/tsconfig.json"
+      ],
+      "output": []
+    },
+    "test": {
+      "dependencies": [
+        "test:compile",
+        "test:only",
+        "test:command-reference",
+        "test:deprecation-policy",
+        "lint",
+        "test:json-schema"
+      ]
+    },
+    "test:command-reference": {
+      "command": "ts-node \"./bin/dev.js\" commandreference:generate --erroronwarnings",
+      "files": [
+        "src/**/*.ts",
+        "messages/**",
+        "package.json"
+      ],
+      "output": [
+        "tmp/root"
+      ]
+    },
+    "test:deprecation-policy": {
+      "command": "ts-node \"./bin/dev.js\" snapshot:compare",
+      "files": [
+        "src/**/*.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "compile"
+      ]
+    },
+    "test:json-schema": {
+      "command": "ts-node \"./bin/dev.js\" schema:compare",
+      "files": [
+        "src/**/*.ts",
+        "schemas"
+      ],
+      "output": []
+    },
+    "test:compile": {
+      "command": "tsc -p \"./test\" --pretty",
+      "files": [
+        "test/**/*.ts",
+        "**/tsconfig.json"
+      ],
+      "output": []
+    },
+    "test:only": {
+      "command": "nyc mocha \"test/**/*.test.ts\"",
+      "env": {
+        "FORCE_COLOR": "2"
+      },
+      "files": [
+        "test/**/*.ts",
+        "src/**/*.ts",
+        "**/tsconfig.json",
+        ".mocha*",
+        "!*.nut.ts",
+        ".nycrc"
+      ],
+      "output": []
+    }
+  },
+  "exports": "./lib/index.js",
+  "type": "module"
+}
