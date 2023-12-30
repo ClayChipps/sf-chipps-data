@@ -7,7 +7,7 @@
 
 import { MockTestOrgData, TestContext } from '@salesforce/core/lib/testSetup.js';
 
-describe('chipps package dependencies install', () => {
+describe('chipps data files upload', () => {
   const $$ = new TestContext();
   const testOrg = new MockTestOrgData();
 

@@ -10,7 +10,9 @@
     "@salesforce/kit": "^3.0.15",
     "@salesforce/sf-plugins-core": "^5.0.13",
     "csv-parse": "^5.5.3",
-    "fs": "^0.0.1-security"
+    "csv-writer": "^1.6.0",
+    "fs": "^0.0.1-security",
+    "p-queue": "^8.0.1"
   },
   "devDependencies": {
     "@oclif/plugin-command-snapshot": "^5.0.2",
@@ -57,13 +59,13 @@
     ],
     "topics": {
       "chipps": {
-        "description": "description for chipps",
+        "description": "Commands created by @ClayChipps",
         "subtopics": {
           "data": {
-            "description": "description for chipps.data",
+            "description": "Commands for working with data",
             "subtopics": {
               "files": {
-                "description": "description for chipps.data.files"
+                "description": "Commands for working with files"
               }
             }
           }

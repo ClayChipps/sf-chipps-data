@@ -41,7 +41,7 @@ To use your plugin, run using the local `./bin/dev` or `./bin/dev.cmd` file.
 
 ```bash
 # Run using local run file.
-./bin/dev.cmd hello world
+./bin/dev.cmd chipps data
 ```
 
 There should be no differences when running via the Salesforce CLI or using the local run file. However, it can be useful to link the plugin to do some additional testing or run your commands from anywhere on your machine.
