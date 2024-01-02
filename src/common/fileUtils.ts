@@ -6,11 +6,13 @@
  */
 
 import { createReadStream } from 'node:fs';
+import FormData from 'form-data';
+import got from 'got';
 import { Connection } from '@salesforce/core';
-import { CreateResult, ContentVersionCreateRequest, ContentVersion } from './typeDefs.js';
+import { ContentVersionCreateRequest, ContentVersion, CreateResult } from './typeDefs.js';
 
 export async function uploadContentVersion(
-  connection: Connection,
+  targetOrgConnection: Connection,
   pathOnClient: string,
   title?: string,
   firstPublishLocationId?: string
@@ -21,33 +23,22 @@ export async function uploadContentVersion(
     Title: title,
   };
 
-  // Build the multi-part form data to be passed to the Request
-  /* eslint-disable camelcase */
-  const formData = {
-    entity_content: {
-      value: JSON.stringify(contentVersionCreateRequest),
-      options: {
-        contentType: 'application/json',
+  const form = new FormData();
+  form.append('entity_content', JSON.stringify(contentVersionCreateRequest), { contentType: 'application/json' });
+  form.append('VersionData', createReadStream(pathOnClient), { filename: pathOnClient });
+
+  const data = await got
+    .post(`${targetOrgConnection.baseUrl()}/sobjects/ContentVersion`, {
+      body: form,
+      headers: {
+        Authorization: `Bearer ${targetOrgConnection.accessToken}`,
+        'Content-Type': `multipart/form-data; boundary="${form.getBoundary()}"`,
       },
-    },
-    VersionData: createReadStream(pathOnClient),
-  };
-  /* eslint-enable camelcase */
+    })
+    .json<CreateResult>();
 
-  // POST the multipart form to Salesforce's API, can't use the normal "create" action because it doesn't support multipart
-  // Had to bypass the type def to allow formData to pass through, will try and get it patched into the type def later
-  // it is handled correctly by the underlying 'request' library.
-  // https://github.com/request/request#multipartform-data-multipart-form-uploads
-  /* eslint-disable @typescript-eslint/no-unnecessary-type-assertion, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any */
-  const contentVersion = (await connection.request({
-    url: `/services/data/v${connection.getApiVersion()}/sobjects/ContentVersion`,
-    formData,
-    method: 'POST',
-  } as any)) as CreateResult;
-  /* eslint-enable @typescript-eslint/no-unnecessary-type-assertion, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any */
-
-  const queryResult = await connection.singleRecordQuery(
-    `SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id='${contentVersion.id}'`
+  const queryResult = await targetOrgConnection.singleRecordQuery(
+    `SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id='${data.id}'`
   );
 
   return queryResult as ContentVersion;

@@ -83,6 +83,14 @@ export default class DataFilesUpload extends SfCommand<void> {
     const parser = createReadStream(flags['file-path']).pipe(parse({ bom: true, columns: true }));
 
     let count = 0;
+    fileQueue.on('add', () => {
+      this.spinner.start(
+        'Uploading files',
+        `Completed: ${count}. Size: ${fileQueue.size}  Pending: ${fileQueue.pending}`,
+        { stdout: true }
+      );
+    });
+
     fileQueue.on('completed', () => {
       this.spinner.start(
         'Uploading files',
@@ -92,7 +100,7 @@ export default class DataFilesUpload extends SfCommand<void> {
     });
 
     for await (const record of parser) {
-      await fileQueue.add(async () => {
+      void fileQueue.add(async () => {
         const fileToUpload = record as FileToUpload;
         try {
           const contentVersion = await uploadContentVersion(
@@ -102,7 +110,6 @@ export default class DataFilesUpload extends SfCommand<void> {
             fileToUpload.FirstPublishLocationId
           );
           fileToUpload.ContentDocumentId = contentVersion.ContentDocumentId;
-          console.log(fileToUpload.ContentDocumentId);
           await successWriter.writeRecords([fileToUpload]);
         } catch (error) {
           fileToUpload.Error = error as string;
