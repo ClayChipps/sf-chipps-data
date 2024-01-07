@@ -3,16 +3,8 @@
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
-    "baseUrl": ".",
     "skipLibCheck": true,
-    "strictNullChecks": true,
-    "sourceMap": true,
-    "paths": {
-      "@salesforce/packaging": ["node_modules/@salesforce/packaging"],
-      "@salesforce/kit": ["node_modules/@salesforce/kit"],
-      "@salesforce/core": ["node_modules/@salesforce/core"],
-      "@oclif/core": ["node_modules/@oclif/core"]
-    }
+    "allowSyntheticDefaultImports": true
   },
   "include": ["./src/**/*.ts"]
 }

@@ -28,3 +28,11 @@ export interface CreateResult {
   name: string;
   message: string;
 }
+
+export type FileToUpload = {
+  ContentDocumentId?: string;
+  Error?: string;
+  FirstPublishLocationId?: string;
+  PathOnClient: string;
+  Title: string;
+};

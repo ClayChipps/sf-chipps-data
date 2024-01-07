@@ -3,14 +3,6 @@
   "include": ["./**/*.ts"],
   "compilerOptions": {
     "skipLibCheck": true,
-    "strictNullChecks": true,
-    "baseUrl": "../",
-    "sourceMap": true,
-    "paths": {
-      "@salesforce/packaging": ["node_modules/@salesforce/packaging"],
-      "@salesforce/kit": ["node_modules/@salesforce/kit"],
-      "@salesforce/core": ["node_modules/@salesforce/core"],
-      "@oclif/core": ["node_modules/@oclif/core"]
-    }
+    "strictNullChecks": true
   }
 }

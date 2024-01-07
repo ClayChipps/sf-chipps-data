@@ -5,7 +5,8 @@
  * For full license text, see LICENSE.md file in the repo root or https://opensource.org/licenses/MIT
  */
 
-import { createReadStream } from 'node:fs';
+import fs from 'node:fs';
+import path from 'node:path';
 import FormData from 'form-data';
 import got from 'got';
 import { Connection } from '@salesforce/core';
@@ -20,12 +21,12 @@ export async function uploadContentVersion(
   const contentVersionCreateRequest: ContentVersionCreateRequest = {
     FirstPublishLocationId: firstPublishLocationId,
     PathOnClient: pathOnClient,
-    Title: title,
+    Title: title ?? path.basename(pathOnClient),
   };
 
   const form = new FormData();
   form.append('entity_content', JSON.stringify(contentVersionCreateRequest), { contentType: 'application/json' });
-  form.append('VersionData', createReadStream(pathOnClient), { filename: pathOnClient });
+  form.append('VersionData', fs.createReadStream(pathOnClient), { filename: path.basename(pathOnClient) });
 
   const data = await got
     .post(`${targetOrgConnection.baseUrl()}/sobjects/ContentVersion`, {

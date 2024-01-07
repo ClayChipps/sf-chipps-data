@@ -4,6 +4,14 @@
     "command": "chipps:data:file:upload",
     "flagAliases": [],
     "flagChars": ["o"],
+    "flags": ["api-version", "file-path", "first-publish-location-id", "json", "target-org", "title"],
+    "plugin": "sf-chipps-data"
+  },
+  {
+    "alias": [],
+    "command": "chipps:data:files:upload",
+    "flagAliases": [],
+    "flagChars": ["o"],
     "flags": ["api-version", "file-path", "json", "max-parallel-jobs", "target-org"],
     "plugin": "sf-chipps-data"
   }
