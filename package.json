@@ -1,7 +1,7 @@
 {
   "name": "sf-chipps-data",
   "description": "Utilities for working with data",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "@ClayChipps",
   "bugs": "https://github.com/ClayChipps/sf-chipps-data/issues",
   "dependencies": {
@@ -51,7 +51,7 @@
     "sf-plugin",
     "sf"
   ],
-  "license": "MIT",
+  "license": "BSD-3-Clause",
   "oclif": {
     "commands": "./lib/commands",
     "bin": "sf",
@@ -153,7 +153,7 @@
       ]
     },
     "test:command-reference": {
-      "command": "node --loader ts-node/esm --no-warnings=ExperimentalWarning \"./bin/dev.js\" commandreference:generate --erroronwarnings",
+      "command": "ts-node \"./bin/dev.js\" commandreference:generate --erroronwarnings",
       "files": [
         "src/**/*.ts",
         "messages/**",
@@ -164,7 +164,7 @@
       ]
     },
     "test:deprecation-policy": {
-      "command": "node --loader ts-node/esm --no-warnings=ExperimentalWarning \"./bin/dev.js\" snapshot:compare",
+      "command": "ts-node \"./bin/dev.js\" snapshot:compare",
       "files": [
         "src/**/*.ts"
       ],
@@ -174,7 +174,7 @@
       ]
     },
     "test:json-schema": {
-      "command": "node --loader ts-node/esm --no-warnings=ExperimentalWarning \"./bin/dev.js\" schema:compare",
+      "command": "ts-node \"./bin/dev.js\" schema:compare",
       "files": [
         "src/**/*.ts",
         "schemas"

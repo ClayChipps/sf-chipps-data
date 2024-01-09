@@ -56,5 +56,83 @@ sf plugins
 ## Commands
 
 <!-- commands -->
+* [`sf chipps data file upload`](#sf-chipps-data-file-upload)
+* [`sf chipps data files upload`](#sf-chipps-data-files-upload)
 
+## `sf chipps data file upload`
+
+Upload a file to a Salesforce org.
+
+```
+USAGE
+  $ sf chipps data file upload --file-path <value> -o <value> [--json] [--api-version <value>] [--first-publish-location-id
+    <value>] [--title <value>]
+
+FLAGS
+  -o, --target-org=<value>                 (required) Username or alias of the target org. Not required if the
+                                           `target-org` configuration variable is already set.
+      --api-version=<value>                Override the api version used for api requests made by this command
+      --file-path=<value>                  (required) Path to the file to upload.
+      --first-publish-location-id=<value>  Specify a record Id that the file should be linked to.
+      --title=<value>                      Specify the title for the file being uploaded.
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  Upload a file to a Salesforce org.
+
+  Uploads a file to a Salesforce org.
+
+EXAMPLES
+  $ sf chipps data file upload --file-path fileToUpload.txt --target-org myTargetOrg
+
+  $ sf chipps data file upload --file-path fileToUpload.txt --first-publish-location-id 0019000000DmehK --target-org myTargetOrg
+```
+
+_See code: [lib/commands/chipps/data/file/upload.ts](https://github.com/ClayChipps/sf-chipps-data/blob/0.1.0/lib/commands/chipps/data/file/upload.ts)_
+
+## `sf chipps data files upload`
+
+Upload files to a Salesforce org.
+
+```
+USAGE
+  $ sf chipps data files upload --file-path <value> -o <value> [--json] [--api-version <value>] [--max-parallel-jobs
+  <value>]
+
+FLAGS
+  -o, --target-org=<value>         (required) Username or alias of the target org. Not required if the `target-org`
+                                   configuration variable is already set.
+      --api-version=<value>        Override the api version used for api requests made by this command
+      --file-path=<value>          (required) Path to the csv file that specifies the upload.
+      --max-parallel-jobs=<value>  [default: 1] Maximum number of parallel jobs.
+
+GLOBAL FLAGS
+  --json  Format output as json.
+
+DESCRIPTION
+  Upload files to a Salesforce org.
+
+  Uploads files specified by a csv to a Salesforce org. By default, the plugin uses the REST API for the upload as the
+  Bulk API is limited in its payload size. This means that each file will use one REST API request.
+
+EXAMPLES
+  $ sf chipps data files upload --file-path filesToUpload.csv --target-org myTargetOrg
+
+  $ sf chipps data files upload --file-path filesToUpload.csv --max-parallel-jobs 5 --target-org myTargetOrg
+
+FLAG DESCRIPTIONS
+  --file-path=<value>  Path to the csv file that specifies the upload.
+
+    The csv file must specify PathOnClient and Title. Optionally, a FirstPublishLocationId can be specified to have it
+    linked directly to a Salesforce record after upload.
+
+  --max-parallel-jobs=<value>  Maximum number of parallel jobs.
+
+    By default the plugin will only process a single file upload at a time. You can increase this value to allow for
+    quasi concurrent uploads. Please note that setting this value too high can cause performance issues.
+```
+
+_See code: [lib/commands/chipps/data/files/upload.ts](https://github.com/ClayChipps/sf-chipps-data/blob/0.1.0/lib/commands/chipps/data/files/upload.ts)_
 <!-- commandsstop -->
