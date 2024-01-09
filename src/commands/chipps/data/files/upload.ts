@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.md file in the repo root or https://opensource.org/licenses/MIT
  */
 
-import { createReadStream } from 'node:fs';
+import fs from 'node:fs';
 import { parse } from 'csv-parse';
 import { createObjectCsvWriter } from 'csv-writer';
 import PQueue from 'p-queue';
@@ -47,7 +47,7 @@ export default class DataFilesUpload extends SfCommand<void> {
       throw messages.createError('error.targetOrgConnectionFailed');
     }
 
-    this.spinner.start('Initializing file upload', '', { stdout: true });
+    this.spinner.start('Initializing file upload', '\n', { stdout: true });
 
     const successWriter = createObjectCsvWriter({
       path: 'success.csv',
@@ -73,23 +73,18 @@ export default class DataFilesUpload extends SfCommand<void> {
 
     const fileQueue = new PQueue({ concurrency: flags['max-parallel-jobs'] });
 
-    const parser = createReadStream(flags['file-path']).pipe(parse({ bom: true, columns: true }));
+    const parser = fs.createReadStream(flags['file-path']).pipe(parse({ bom: true, columns: true }));
+
+    this.spinner.start('Uploading files', 'Initializing\n', { stdout: true });
 
     let count = 0;
     fileQueue.on('add', () => {
-      this.spinner.start(
-        'Uploading files',
-        `Completed: ${count}. Size: ${fileQueue.size}  Pending: ${fileQueue.pending}`,
-        { stdout: true }
-      );
+      this.spinner.status = `Completed: ${count}. Size: ${fileQueue.size}  Pending: ${fileQueue.pending}\n`;
     });
 
     fileQueue.on('completed', () => {
-      this.spinner.start(
-        'Uploading files',
-        `Completed: ${++count}. Size: ${fileQueue.size}  Pending: ${fileQueue.pending}`,
-        { stdout: true }
-      );
+      count++;
+      this.spinner.status = `Completed: ${count}. Size: ${fileQueue.size}  Pending: ${fileQueue.pending}\n`;
     });
 
     for await (const record of parser) {

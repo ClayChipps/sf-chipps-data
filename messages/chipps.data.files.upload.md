@@ -12,7 +12,7 @@ Path to the csv file that specifies the upload.
 
 # flags.file-path.description
 
-The csv file must specify PathOnClient and Title. Optionally, a FirstPublishLocationId can be specified to have it linked directly to a Salesforce record after upload.
+The csv file must specify the columns PathOnClient and Title. Optionally, a FirstPublishLocationId can be specified to have it linked directly to a Salesforce record after upload.
 
 # flags.max-parallel-jobs.summary
 
