@@ -1,6 +1,6 @@
 # sf-chipps-data
 
-[![NPM](https://img.shields.io/npm/v/sf-chipps-data.svg?label=sf-chipps-data)](https://www.npmjs.com/data/sf-chipps-data) [![Downloads/week](https://img.shields.io/npm/dw/sf-chipps-data.svg)](https://npmjs.org/data/sf-chipps-data) [![Known Vulnerabilities](https://snyk.io/test/github/ClayChipps/sf-chipps-data/badge.svg)](https://snyk.io/test/github/ClayChipps/sf-chipps-data) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/salesforcecli/sf-chipps-data/main/LICENSE.txt)
+[![NPM](https://img.shields.io/npm/v/sf-chipps-data.svg?label=sf-chipps-data)](https://npmjs.com/package/sf-chipps-data) [![Downloads/week](https://img.shields.io/npm/dw/sf-chipps-data.svg)](https://npmjs.com/package/sf-chipps-data) [![Known Vulnerabilities](https://snyk.io/test/github/ClayChipps/sf-chipps-data/badge.svg)](https://snyk.io/test/github/ClayChipps/sf-chipps-data) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/ClayChipps/sf-chipps-data/main/LICENSE.txt)
 
 ## Install
 
@@ -56,8 +56,9 @@ sf plugins
 ## Commands
 
 <!-- commands -->
-* [`sf chipps data file upload`](#sf-chipps-data-file-upload)
-* [`sf chipps data files upload`](#sf-chipps-data-files-upload)
+
+- [`sf chipps data file upload`](#sf-chipps-data-file-upload)
+- [`sf chipps data files upload`](#sf-chipps-data-files-upload)
 
 ## `sf chipps data file upload`
 
@@ -90,7 +91,7 @@ EXAMPLES
   $ sf chipps data file upload --file-path fileToUpload.txt --first-publish-location-id 0019000000DmehK --target-org myTargetOrg
 ```
 
-_See code: [lib/commands/chipps/data/file/upload.ts](https://github.com/ClayChipps/sf-chipps-data/blob/0.1.0/lib/commands/chipps/data/file/upload.ts)_
+_See code: [src/commands/chipps/data/file/upload.ts](https://github.com/ClayChipps/sf-chipps-data/blob/v0.2.0/src/commands/chipps/data/file/upload.ts)_
 
 ## `sf chipps data files upload`
 
@@ -125,8 +126,8 @@ EXAMPLES
 FLAG DESCRIPTIONS
   --file-path=<value>  Path to the csv file that specifies the upload.
 
-    The csv file must specify PathOnClient and Title. Optionally, a FirstPublishLocationId can be specified to have it
-    linked directly to a Salesforce record after upload.
+    The csv file must specify the columns PathOnClient and Title. Optionally, a FirstPublishLocationId can be specified
+    to have it linked directly to a Salesforce record after upload.
 
   --max-parallel-jobs=<value>  Maximum number of parallel jobs.
 
@@ -134,5 +135,6 @@ FLAG DESCRIPTIONS
     quasi concurrent uploads. Please note that setting this value too high can cause performance issues.
 ```
 
-_See code: [lib/commands/chipps/data/files/upload.ts](https://github.com/ClayChipps/sf-chipps-data/blob/0.1.0/lib/commands/chipps/data/files/upload.ts)_
+_See code: [src/commands/chipps/data/files/upload.ts](https://github.com/ClayChipps/sf-chipps-data/blob/v0.2.0/src/commands/chipps/data/files/upload.ts)_
+
 <!-- commandsstop -->
