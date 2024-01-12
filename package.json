@@ -51,13 +51,16 @@
   ],
   "license": "BSD-3-Clause",
   "oclif": {
-    "commands": "./lib/commands",
     "bin": "sf",
+    "commands": "./lib/commands",
     "devPlugins": [
       "@oclif/plugin-command-snapshot",
       "@oclif/plugin-help",
       "@salesforce/plugin-command-reference"
     ],
+    "flexibleTaxonomy": true,
+    "plugins": [],
+    "repositoryPrefix": "<%- repo %>/blob/<%- version %>/<%- commandPath %>",
     "topics": {
       "chipps": {
         "description": "Commands created by @ClayChipps",
@@ -73,7 +76,6 @@
         }
       }
     },
-    "flexibleTaxonomy": true,
     "topicSeparator": " "
   },
   "repository": "ClayChipps/sf-chipps-data",

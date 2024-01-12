@@ -91,7 +91,7 @@ EXAMPLES
   $ sf chipps data file upload --file-path fileToUpload.txt --first-publish-location-id 0019000000DmehK --target-org myTargetOrg
 ```
 
-_See code: [src/commands/chipps/data/file/upload.ts](https://github.com/ClayChipps/sf-chipps-data/blob/v0.2.0/src/commands/chipps/data/file/upload.ts)_
+_See code: [src/commands/chipps/data/file/upload.ts](https://github.com/ClayChipps/sf-chipps-data/blob/0.2.0/src/commands/chipps/data/file/upload.ts)_
 
 ## `sf chipps data files upload`
 
@@ -135,6 +135,6 @@ FLAG DESCRIPTIONS
     quasi concurrent uploads. Please note that setting this value too high can cause performance issues.
 ```
 
-_See code: [src/commands/chipps/data/files/upload.ts](https://github.com/ClayChipps/sf-chipps-data/blob/v0.2.0/src/commands/chipps/data/files/upload.ts)_
+_See code: [src/commands/chipps/data/files/upload.ts](https://github.com/ClayChipps/sf-chipps-data/blob/0.2.0/src/commands/chipps/data/files/upload.ts)_
 
 <!-- commandsstop -->
