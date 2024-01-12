@@ -1,4 +1,18 @@
-# 0.2.0 (2024-01-09)
+# [0.3.0](https://github.com/ClayChipps/sf-chipps-data/compare/0.2.0...0.3.0) (2024-01-12)
+
+
+### Bug Fixes
+
+* upload files unit test ([4ef1ebb](https://github.com/ClayChipps/sf-chipps-data/commit/4ef1ebb8c55d50897a704caf8c14c643ccdb4222))
+
+
+### Features
+
+* add unit tests ([35fab04](https://github.com/ClayChipps/sf-chipps-data/commit/35fab0478de99860c0e6224fdcf6db55d51664dd))
+
+
+
+# [0.2.0](https://github.com/ClayChipps/sf-chipps-data/compare/5211bff03a946ff588d399e05d2c3dc7711aaa2c...0.2.0) (2024-01-09)
 
 
 ### Bug Fixes
