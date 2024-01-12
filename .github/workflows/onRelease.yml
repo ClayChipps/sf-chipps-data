@@ -19,13 +19,11 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.release.tag_name || inputs.tag  }}
-      - uses: salesforcecli/github-workflows/.github/actions/getPreReleaseTag@main
+      - uses: ClayChipps/sf-chipps-github-workflows/.github/actions/getPreReleaseTag@main
         id: distTag
   npm:
-    uses: salesforcecli/github-workflows/.github/workflows/npmPublish.yml@main
+    uses: ClayChipps/sf-chipps-github-workflows/.github/workflows/npmPublish.yml@main
     needs: [getDistTag]
     with:
-      tag: ${{ needs.getDistTag.outputs.tag || 'latest' }}
       githubTag: ${{ github.event.release.tag_name || inputs.tag }}
-
     secrets: inherit
