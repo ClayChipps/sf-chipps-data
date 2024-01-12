@@ -954,30 +954,6 @@
     semver "^7.5.4"
     ts-retry-promise "^0.7.1"
 
-"@salesforce/core@^6.4.2":
-  version "6.4.7"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-6.4.7.tgz#f15538380aa5c75de697d3c95a2ddbdabae69dbb"
-  integrity sha512-gebjw2xC8Z0gqS3lYRQWz7J+PuGZtybotrnnaJbnzzxdfpBFIp6PjW4nt/235BQW9UWFTLaQh+AwkFgmMTTSkA==
-  dependencies:
-    "@salesforce/kit" "^3.0.15"
-    "@salesforce/schemas" "^1.6.1"
-    "@salesforce/ts-types" "^2.0.9"
-    "@types/semver" "^7.5.6"
-    ajv "^8.12.0"
-    change-case "^4.1.2"
-    faye "^1.4.0"
-    form-data "^4.0.0"
-    js2xmlparser "^4.0.1"
-    jsforce "^2.0.0-beta.29"
-    jsonwebtoken "9.0.2"
-    jszip "3.10.1"
-    pino "^8.17.2"
-    pino-abstract-transport "^1.1.0"
-    pino-pretty "^10.3.1"
-    proper-lockfile "^4.1.2"
-    semver "^7.5.4"
-    ts-retry-promise "^0.7.1"
-
 "@salesforce/dev-config@^4.1.0":
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@salesforce/dev-config/-/dev-config-4.1.0.tgz#e529576466d074e7a5f1441236510fef123da01e"
@@ -3079,7 +3055,7 @@ eslint-plugin-perfectionist@^2.1.0:
     minimatch "^9.0.3"
     natural-compare-lite "^1.4.0"
 
-eslint-plugin-sf-plugin@^1.17.1:
+eslint-plugin-sf-plugin@^1.17.0:
   version "1.17.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.17.1.tgz#085119cb27d856170c0651c0d0abbd25493a22d6"
   integrity sha512-ZbIC0P5W7enSMNWZYTKKMzQ+yAU8FyWKazdOwk2rMrMEVk+LA23lfKcgCEvvuala718TEkqkPTwPYyn7qujPkA==
@@ -5450,11 +5426,6 @@ mocha@^10.2.0:
     yargs-parser "20.2.4"
     yargs-unparser "2.0.0"
 
-moment@^2.29.1:
-  version "2.30.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
-  integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==
-
 mri@^1.1.5:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/mri/-/mri-1.2.0.tgz#6721480fec2a11a4889861115a48b6cbe7cc8f0b"
@@ -6336,7 +6307,7 @@ pino-std-serializers@^6.0.0:
   resolved "https://registry.yarnpkg.com/pino-std-serializers/-/pino-std-serializers-6.2.2.tgz#d9a9b5f2b9a402486a5fc4db0a737570a860aab3"
   integrity sha512-cHjPPsE+vhj/tnhCy/wiMh3M3z3h/j15zHQX+S9GkTBgqJuTuJzYJ4gUyACLhDaJ7kk9ba9iRDmbH2tJU03OiA==
 
-pino@^8.16.2, pino@^8.17.2:
+pino@^8.16.2:
   version "8.17.2"
   resolved "https://registry.yarnpkg.com/pino/-/pino-8.17.2.tgz#0ed20175623a69d31664a1e8a5f85476272224be"
   integrity sha512-LA6qKgeDMLr2ux2y/YiUt47EfgQ+S9LznBWOJdN3q1dx2sv0ziDLUBeVpyVv17TEcGCBuWf0zNtg3M5m1NhhWQ==
