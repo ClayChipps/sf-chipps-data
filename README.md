@@ -1,6 +1,6 @@
 # sf-chipps-data
 
-[![NPM](https://img.shields.io/npm/v/sf-chipps-data.svg?label=sf-chipps-data)](https://npmjs.com/package/sf-chipps-data) [![Downloads/week](https://img.shields.io/npm/dw/sf-chipps-data.svg)](https://npmjs.com/package/sf-chipps-data) [![Known Vulnerabilities](https://snyk.io/test/github/ClayChipps/sf-chipps-data/badge.svg)](https://snyk.io/test/github/ClayChipps/sf-chipps-data) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/ClayChipps/sf-chipps-data/main/LICENSE.txt)
+[![NPM](https://img.shields.io/npm/v/sf-chipps-data.svg?label=sf-chipps-data)](https://npmjs.com/package/sf-chipps-data) [![Downloads/week](https://img.shields.io/npm/dw/sf-chipps-data.svg)](https://npmjs.com/package/sf-chipps-data) [![Known Vulnerabilities](https://snyk.io/test/github/ClayChipps/sf-chipps-data/badge.svg)](https://snyk.io/test/github/ClayChipps/sf-chipps-data) [![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD_3--Clause-yellow.svg)](https://raw.githubusercontent.com/ClayChipps/sf-chipps-data/main/LICENSE.txt)
 
 ## Install
 
