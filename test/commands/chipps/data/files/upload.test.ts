@@ -6,12 +6,13 @@
  */
 
 import fs from 'node:fs';
-import { parse } from 'csv-parse';
+import { parse } from 'csv-parse/sync';
 import nock from 'nock';
 import { expect } from 'chai';
 import { Connection, SfError } from '@salesforce/core';
 import { MockTestOrgData, TestContext } from '@salesforce/core/lib/testSetup.js';
 import DataFilesUpload from '../../../../../src/commands/chipps/data/files/upload.js';
+import { FileToUpload } from '../../../../../src/common/typeDefs.js';
 
 describe('chipps data files upload', () => {
   const $$ = new TestContext();
@@ -57,13 +58,23 @@ describe('chipps data files upload', () => {
       testOrg.username,
     ]);
 
-    const errorResults = parse(fs.readFileSync('error.csv'), { bom: true, columns: true });
-    const successResults = parse(fs.readFileSync('success.csv'), { bom: true, columns: true });
+    const errorResults = parse(fs.readFileSync('error.csv'), { bom: true, columns: true }) as FileToUpload[];
+    const successResults = parse(fs.readFileSync('success.csv'), { bom: true, columns: true }) as FileToUpload[];
 
-    expect(errorResults).to.contain('RequestError: ENOENT: no such file or directory');
+    expect(errorResults[0].Error).to.contain('RequestError: ENOENT: no such file or directory');
     expect(successResults).to.deep.equal([
-      { PathOnClient: 'test\test-files\basicTextFile.txt', Title: 'Basic Text File', ContentDocumentId: 123 },
-      { PathOnClient: 'test\test-fileswatchDoge.jpg', Title: 'Watch Doges', ContentDocumentId: 123 },
+      {
+        ContentDocumentId: '123',
+        FirstPublishLocationId: '',
+        PathOnClient: 'test\\test-files\\basicTextFile.txt',
+        Title: 'Basic Text File',
+      },
+      {
+        ContentDocumentId: '123',
+        FirstPublishLocationId: '',
+        PathOnClient: 'test\\test-files\\watchDoge.jpg',
+        Title: 'Watch Doges',
+      },
     ]);
   });
 });
