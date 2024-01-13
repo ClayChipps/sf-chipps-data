@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@oclif/plugin-command-snapshot": "^5.0.2",
-    "@salesforce/cli-plugins-testkit": "^5.1.4",
+    "@salesforce/cli-plugins-testkit": "^5.1.7",
     "@salesforce/plugin-command-reference": "^3.0.61",
     "@salesforce/ts-sinon": "1.4.19",
     "@types/shelljs": "^0.8.14",
