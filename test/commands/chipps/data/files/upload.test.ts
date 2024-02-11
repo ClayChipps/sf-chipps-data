@@ -7,8 +7,7 @@
 
 import fs from 'node:fs';
 import { parse } from 'csv-parse/sync';
-import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
+import nock from 'nock';
 import { expect } from 'chai';
 import { Connection, SfError } from '@salesforce/core';
 import { MockTestOrgData, TestContext } from '@salesforce/core/lib/testSetup.js';
@@ -39,12 +38,10 @@ describe('chipps data files upload', () => {
   });
 
   it('should write results to csv', async () => {
-    const server = setupServer(
-      http.post(`${(await testOrg.getConnection()).baseUrl()}/sobjects/ContentVersion`, () =>
-        HttpResponse.json([{ id: '123', success: true }])
-      )
-    );
-    server.listen();
+    nock(testOrg.instanceUrl)
+      .post('/services/data/v42.0/sobjects/ContentVersion')
+      .reply(200, { id: '123', success: true })
+      .persist();
 
     $$.SANDBOX.stub(Connection.prototype, 'singleRecordQuery').resolves({
       Id: '123',
@@ -64,7 +61,7 @@ describe('chipps data files upload', () => {
     const errorResults = parse(fs.readFileSync('error.csv'), { bom: true, columns: true }) as FileToUpload[];
     const successResults = parse(fs.readFileSync('success.csv'), { bom: true, columns: true }) as FileToUpload[];
 
-    expect(errorResults[0].Error).to.contain('Error: ENOENT: no such file or directory');
+    expect(errorResults[0].Error).to.contain('RequestError: ENOENT: no such file or directory');
     expect(successResults).to.deep.equal([
       {
         ContentDocumentId: '123',
@@ -79,7 +76,5 @@ describe('chipps data files upload', () => {
         Title: 'Watch Doges',
       },
     ]);
-
-    server.close();
   });
 });

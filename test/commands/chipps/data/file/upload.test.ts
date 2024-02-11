@@ -5,9 +5,8 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
+import nock from 'nock';
 import { expect } from 'chai';
-import { http, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
 import { Connection, SfError } from '@salesforce/core';
 import { MockTestOrgData, TestContext } from '@salesforce/core/lib/testSetup.js';
 import DataFileUpload from '../../../../../src/commands/chipps/data/file/upload.js';
@@ -36,12 +35,10 @@ describe('chipps data file upload', () => {
   });
 
   it('should return content version successfully', async () => {
-    const server = setupServer(
-      http.post(`${(await testOrg.getConnection()).baseUrl()}/sobjects/ContentVersion`, () =>
-        HttpResponse.json([{ id: '123', success: true }])
-      )
-    );
-    server.listen();
+    nock(testOrg.instanceUrl)
+      .post('/services/data/v42.0/sobjects/ContentVersion')
+      .reply(200, { id: '123', success: true })
+      .persist();
 
     $$.SANDBOX.stub(Connection.prototype, 'singleRecordQuery').resolves({
       Id: '123',
@@ -63,7 +60,5 @@ describe('chipps data file upload', () => {
     expect(response.Name).to.equal('coolFile');
     expect(response.Title).to.equal('coolFile');
     expect(response.FileExtension).to.equal('.json');
-
-    server.close();
   });
 });
