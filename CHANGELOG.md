@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/ClayChipps/sf-chipps-data/compare/0.3.0...0.4.0) (2024-02-11)
+
+
+### Features
+
+* replace got and nock ([ed17231](https://github.com/ClayChipps/sf-chipps-data/commit/ed17231b34b16cba59e24ea7b79e3dc6b11e0e0f))
+
+
+
 # [0.3.0](https://github.com/ClayChipps/sf-chipps-data/compare/0.2.0...0.3.0) (2024-01-12)
 
 
