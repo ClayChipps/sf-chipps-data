@@ -7,7 +7,6 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import fetch from 'node-fetch';
 import FormData from 'form-data';
 import { Connection } from '@salesforce/core';
 import { ContentVersionCreateRequest, ContentVersion, CreateResult } from './typeDefs.js';
@@ -18,6 +17,9 @@ export async function uploadContentVersion(
   title?: string,
   firstPublishLocationId?: string
 ): Promise<ContentVersion> {
+  // Check that we have access to the file
+  await fs.promises.access(pathOnClient, fs.constants.F_OK);
+
   const contentVersionCreateRequest: ContentVersionCreateRequest = {
     FirstPublishLocationId: firstPublishLocationId,
     PathOnClient: pathOnClient,
