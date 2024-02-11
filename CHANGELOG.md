@@ -1,3 +1,12 @@
+# [0.5.0](https://github.com/ClayChipps/sf-chipps-data/compare/0.4.0...0.5.0) (2024-02-11)
+
+
+### Features
+
+* use native fetch ([d333a75](https://github.com/ClayChipps/sf-chipps-data/commit/d333a75f955d376b19207d91143d97db111f4eb5))
+
+
+
 # [0.4.0](https://github.com/ClayChipps/sf-chipps-data/compare/0.3.0...0.4.0) (2024-02-11)
 
 
