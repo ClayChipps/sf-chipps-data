@@ -7,8 +7,8 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import fetch from 'node-fetch';
 import FormData from 'form-data';
-import got from 'got';
 import { Connection } from '@salesforce/core';
 import { ContentVersionCreateRequest, ContentVersion, CreateResult } from './typeDefs.js';
 
@@ -24,19 +24,19 @@ export async function uploadContentVersion(
     Title: title ?? path.basename(pathOnClient),
   };
 
-  const form = new FormData();
-  form.append('entity_content', JSON.stringify(contentVersionCreateRequest), { contentType: 'application/json' });
-  form.append('VersionData', fs.createReadStream(pathOnClient), { filename: path.basename(pathOnClient) });
+  const formData = new FormData();
+  formData.append('entity_content', JSON.stringify(contentVersionCreateRequest), { contentType: 'application/json' });
+  formData.append('VersionData', fs.createReadStream(pathOnClient), { filename: path.basename(pathOnClient) });
 
-  const data = await got
-    .post(`${targetOrgConnection.baseUrl()}/sobjects/ContentVersion`, {
-      body: form,
-      headers: {
-        Authorization: `Bearer ${targetOrgConnection.accessToken}`,
-        'Content-Type': `multipart/form-data; boundary="${form.getBoundary()}"`,
-      },
-    })
-    .json<CreateResult>();
+  const response = await fetch(`${targetOrgConnection.baseUrl()}/sobjects/ContentVersion`, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${targetOrgConnection.accessToken}`,
+      'Content-Type': `multipart/form-data; boundary="${formData.getBoundary()}"`,
+    },
+  });
+  const data = (await response.json()) as CreateResult;
 
   const queryResult = await targetOrgConnection.singleRecordQuery(
     `SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id='${data.id}'`
