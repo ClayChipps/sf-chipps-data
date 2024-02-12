@@ -1,3 +1,13 @@
+## [0.6.2](https://github.com/ClayChipps/sf-chipps-data/compare/0.6.1...0.6.2) (2024-02-12)
+
+
+### Bug Fixes
+
+* incorrect assertion ([afc7c92](https://github.com/ClayChipps/sf-chipps-data/commit/afc7c927c363c40e3ca8ac7c3821d69b24228337))
+* issue with query ([9c776e8](https://github.com/ClayChipps/sf-chipps-data/commit/9c776e870bbde5161d2785d2b4eb1c8fb42a7afc))
+
+
+
 ## [0.6.1](https://github.com/ClayChipps/sf-chipps-data/compare/0.6.0...0.6.1) (2024-02-12)
 
 
