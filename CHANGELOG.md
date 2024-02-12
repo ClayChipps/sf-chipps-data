@@ -1,3 +1,18 @@
+# [0.6.0](https://github.com/ClayChipps/sf-chipps-data/compare/0.5.0...0.6.0) (2024-02-12)
+
+
+### Bug Fixes
+
+* revert to got 13 for node 18 support ([e76ac83](https://github.com/ClayChipps/sf-chipps-data/commit/e76ac8328e47f644b8861c2d98679367a5bcfde5))
+* update tests to use stubs instead of nock ([0511048](https://github.com/ClayChipps/sf-chipps-data/commit/0511048497b0a8a037953107df2b647e8ecdeb43))
+
+
+### Features
+
+* revert to use got and nock ([b4193d8](https://github.com/ClayChipps/sf-chipps-data/commit/b4193d88446317097a2b9ff9d77dd9f07f06343a))
+
+
+
 # [0.5.0](https://github.com/ClayChipps/sf-chipps-data/compare/0.4.0...0.5.0) (2024-02-11)
 
 
