@@ -1,3 +1,12 @@
+## [0.6.1](https://github.com/ClayChipps/sf-chipps-data/compare/0.6.0...0.6.1) (2024-02-12)
+
+
+### Bug Fixes
+
+* issue with linux unit tests ([45eed5a](https://github.com/ClayChipps/sf-chipps-data/commit/45eed5af973e494d830d475280fac0c0dba8a77c))
+
+
+
 # [0.6.0](https://github.com/ClayChipps/sf-chipps-data/compare/0.5.0...0.6.0) (2024-02-12)
 
 
