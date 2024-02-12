@@ -6,13 +6,11 @@
  */
 
 export interface ContentVersion {
-  attributes: object;
   ContentDocumentId?: string;
   FileExtension: string;
   Id: string;
   Name?: string;
   Title: string;
-  VersionData: string;
 }
 
 export interface ContentVersionCreateRequest {

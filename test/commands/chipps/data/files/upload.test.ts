@@ -62,13 +62,13 @@ describe('chipps data files upload', () => {
       {
         ContentDocumentId: '123',
         FirstPublishLocationId: '',
-        PathOnClient: 'test\\test-files\\basicTextFile.txt',
+        PathOnClient: 'test/test-files/basicTextFile.txt',
         Title: 'Basic Text File',
       },
       {
         ContentDocumentId: '123',
         FirstPublishLocationId: '',
-        PathOnClient: 'test\\test-files\\watchDoge.jpg',
+        PathOnClient: 'test/test-files/watchDoge.jpg',
         Title: 'Watch Doges',
       },
     ]);

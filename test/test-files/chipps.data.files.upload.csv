@@ -1,4 +1,4 @@
 Title,PathOnClient
-"Basic Text File",test\test-files\basicTextFile.txt
-"Watch Doges",test\test-files\watchDoge.jpg
-"Big Bogus File",test\test-files\bogusFile.txt
+"Basic Text File",test/test-files/basicTextFile.txt
+"Watch Doges",test/test-files/watchDoge.jpg
+"Big Bogus File",test/test-files/bogusFile.txt

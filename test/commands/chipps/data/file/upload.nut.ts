@@ -6,7 +6,10 @@
  */
 
 import path from 'node:path';
-import { TestSession } from '@salesforce/cli-plugins-testkit';
+import { expect } from 'chai';
+import { execCmd, TestSession } from '@salesforce/cli-plugins-testkit';
+import { Duration } from '@salesforce/kit';
+import { ContentVersion } from './../../../../../src/common/typeDefs.js';
 
 describe('chipps data files upload', () => {
   let session: TestSession;
@@ -14,6 +17,9 @@ describe('chipps data files upload', () => {
   before(async () => {
     session = await TestSession.create({
       devhubAuthStrategy: 'AUTO',
+      project: {
+        gitClone: 'https://github.com/ClayChipps/easy-spaces-lwc',
+      },
       scratchOrgs: [
         {
           setDefault: true,
@@ -25,5 +31,16 @@ describe('chipps data files upload', () => {
 
   after(async () => {
     await session?.clean();
+  });
+
+  it('should upload content version', () => {
+    const username = [...session.orgs.keys()][0];
+    const command = `chipps data file upload --file-path docs/upload_icon.png --target-org ${username}`;
+    const output = execCmd<ContentVersion>(command, {
+      ensureExitCode: 0,
+      timeout: Duration.minutes(30).milliseconds,
+    }).jsonOutput;
+
+    expect(output!.result.FileExtension).contains('.png');
   });
 });

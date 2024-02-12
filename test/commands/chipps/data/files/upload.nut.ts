@@ -6,7 +6,8 @@
  */
 
 import path from 'node:path';
-import { TestSession } from '@salesforce/cli-plugins-testkit';
+import { execCmd, TestSession } from '@salesforce/cli-plugins-testkit';
+import { Duration } from '@salesforce/kit';
 
 describe('chipps data files upload', () => {
   let session: TestSession;
@@ -14,6 +15,9 @@ describe('chipps data files upload', () => {
   before(async () => {
     session = await TestSession.create({
       devhubAuthStrategy: 'AUTO',
+      project: {
+        gitClone: 'https://github.com/ClayChipps/easy-spaces-lwc',
+      },
       scratchOrgs: [
         {
           setDefault: true,
@@ -25,5 +29,11 @@ describe('chipps data files upload', () => {
 
   after(async () => {
     await session?.clean();
+  });
+
+  it('should upload content versions', () => {
+    const username = [...session.orgs.keys()][0];
+    const command = `chipps data files upload --file-path docs/chipps.data.files.upload.csv --target-org ${username}`;
+    execCmd(command, { ensureExitCode: 0, timeout: Duration.minutes(30).milliseconds });
   });
 });
