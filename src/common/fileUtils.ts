@@ -42,7 +42,7 @@ export async function uploadContentVersion(
   });
 
   const queryResult = await targetOrgConnection.singleRecordQuery(
-    `SELECT ContentDocumentId, FileExtension, Id, Name, Title FROM ContentVersion WHERE Id='${data.id}'`
+    `SELECT ContentDocumentId, FileExtension, Id, Title FROM ContentVersion WHERE Id='${data.id}'`
   );
 
   return queryResult as ContentVersion;

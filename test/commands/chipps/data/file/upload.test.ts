@@ -40,8 +40,7 @@ describe('chipps data file upload', () => {
     $$.SANDBOX.stub(Connection.prototype, 'singleRecordQuery').resolves({
       Id: '123',
       ContentDocumentId: '123',
-      FileExtension: '.json',
-      Name: 'coolFile',
+      FileExtension: 'json',
       Title: 'coolFile',
     });
 
@@ -54,7 +53,6 @@ describe('chipps data file upload', () => {
       testOrg.username,
     ]);
 
-    expect(response.Name).to.equal('coolFile');
     expect(response.Title).to.equal('coolFile');
     expect(response.FileExtension).to.equal('.json');
   });

@@ -41,6 +41,7 @@ describe('chipps data files upload', () => {
       timeout: Duration.minutes(30).milliseconds,
     }).jsonOutput;
 
-    expect(output!.result.FileExtension).contains('.png');
+    expect(output!.result.FileExtension).equals('png');
+    expect(output!.result.Title).equals('upload_icon.png');
   });
 });

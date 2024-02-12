@@ -9,7 +9,6 @@ export interface ContentVersion {
   ContentDocumentId?: string;
   FileExtension: string;
   Id: string;
-  Name?: string;
   Title: string;
 }
 
