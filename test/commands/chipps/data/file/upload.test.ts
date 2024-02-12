@@ -5,8 +5,8 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import nock from 'nock';
 import { expect } from 'chai';
+import got from 'got';
 import { Connection, SfError } from '@salesforce/core';
 import { MockTestOrgData, TestContext } from '@salesforce/core/lib/testSetup.js';
 import DataFileUpload from '../../../../../src/commands/chipps/data/file/upload.js';
@@ -35,10 +35,7 @@ describe('chipps data file upload', () => {
   });
 
   it('should return content version successfully', async () => {
-    nock(testOrg.instanceUrl)
-      .post('/services/data/v42.0/sobjects/ContentVersion')
-      .reply(200, { id: '123', success: true })
-      .persist();
+    $$.SANDBOX.stub(got, 'post').resolves({ id: '123', success: true });
 
     $$.SANDBOX.stub(Connection.prototype, 'singleRecordQuery').resolves({
       Id: '123',

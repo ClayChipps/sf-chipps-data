@@ -31,15 +31,15 @@ export async function uploadContentVersion(
   form.append('entity_content', JSON.stringify(contentVersionCreateRequest), { contentType: 'application/json' });
   form.append('VersionData', fs.createReadStream(pathOnClient), { filename: path.basename(pathOnClient) });
 
-  const data = await got
-    .post(`${targetOrgConnection.baseUrl()}/sobjects/ContentVersion`, {
-      body: form,
-      headers: {
-        Authorization: `Bearer ${targetOrgConnection.accessToken}`,
-        'Content-Type': `multipart/form-data; boundary="${form.getBoundary()}"`,
-      },
-    })
-    .json<CreateResult>();
+  const data: CreateResult = await got.post(`${targetOrgConnection.baseUrl()}/sobjects/ContentVersion`, {
+    body: form,
+    headers: {
+      Authorization: `Bearer ${targetOrgConnection.accessToken}`,
+      'Content-Type': `multipart/form-data; boundary="${form.getBoundary()}"`,
+    },
+    resolveBodyOnly: true,
+    responseType: 'json',
+  });
 
   const queryResult = await targetOrgConnection.singleRecordQuery(
     `SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id='${data.id}'`

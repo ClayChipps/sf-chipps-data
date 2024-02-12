@@ -6,9 +6,9 @@
  */
 
 import fs from 'node:fs';
-import { parse } from 'csv-parse/sync';
-import nock from 'nock';
 import { expect } from 'chai';
+import { parse } from 'csv-parse/sync';
+import got from 'got';
 import { Connection, SfError } from '@salesforce/core';
 import { MockTestOrgData, TestContext } from '@salesforce/core/lib/testSetup.js';
 import DataFilesUpload from '../../../../../src/commands/chipps/data/files/upload.js';
@@ -38,16 +38,12 @@ describe('chipps data files upload', () => {
   });
 
   it('should write results to csv', async () => {
-    nock(testOrg.instanceUrl)
-      .post('/services/data/v42.0/sobjects/ContentVersion')
-      .reply(200, { id: '123', success: true })
-      .persist();
+    $$.SANDBOX.stub(got, 'post').resolves({ id: '123', success: true });
 
     $$.SANDBOX.stub(Connection.prototype, 'singleRecordQuery').resolves({
       Id: '123',
       ContentDocumentId: '123',
       FileExtension: '.json',
-      Name: 'coolFile',
       Title: 'coolFile',
     });
 
@@ -61,7 +57,7 @@ describe('chipps data files upload', () => {
     const errorResults = parse(fs.readFileSync('error.csv'), { bom: true, columns: true }) as FileToUpload[];
     const successResults = parse(fs.readFileSync('success.csv'), { bom: true, columns: true }) as FileToUpload[];
 
-    expect(errorResults[0].Error).to.contain('RequestError: ENOENT: no such file or directory');
+    expect(errorResults[0].Error).to.contain('Error: ENOENT: no such file or directory');
     expect(successResults).to.deep.equal([
       {
         ContentDocumentId: '123',
