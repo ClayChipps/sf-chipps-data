@@ -54,6 +54,6 @@ describe('chipps data file upload', () => {
     ]);
 
     expect(response.Title).to.equal('coolFile');
-    expect(response.FileExtension).to.equal('.json');
+    expect(response.FileExtension).to.equal('json');
   });
 });
