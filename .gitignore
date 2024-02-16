@@ -1,20 +1,20 @@
 # -- CLEAN
 tmp/
+
 # use yarn by default, so ignore npm
 package-lock.json
+npm-shrinkwrap.json
 
 # never checkin npm config
 .npmrc
 
 # debug logs
-npm-error.log
-yarn-error.log
-
-# history extension
-.history
+*-error.log
+*-debug.log
 
 # compile source
 lib
+dist
 
 # test artifacts
 *xunit.xml
@@ -27,16 +27,15 @@ test_session*
 # generated docs
 docs
 
-# ignore sfdx-trust files
-*.tgz
-*.sig
-package.json.bak.
+# oclif files
+oclif.manifest.json
+oclif.lock
 
 # -- CLEAN ALL
-*.tsbuildinfo
-.eslintcache
-.wireit
 node_modules
+.wireit
+.eslintcache
+*.tsbuildinfo
 
 # --
 # put files here you don't want cleaned with sf-clean
@@ -44,7 +43,3 @@ node_modules
 # os specific files
 .DS_Store
 .idea
-
-oclif.manifest.json
-
-oclif.lock
