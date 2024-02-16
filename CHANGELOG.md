@@ -1,3 +1,12 @@
+# [0.7.0](https://github.com/ClayChipps/sf-chipps-data/compare/0.6.4...0.7.0) (2024-02-16)
+
+
+### Features
+
+* update dev-scripts ([e1694da](https://github.com/ClayChipps/sf-chipps-data/commit/e1694da0e58aeb2e46c34e948e2f7bfa44d45b33))
+
+
+
 ## [0.6.4](https://github.com/ClayChipps/sf-chipps-data/compare/0.6.3...0.6.4) (2024-02-13)
 
 
