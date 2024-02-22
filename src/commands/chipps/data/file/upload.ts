@@ -7,8 +7,8 @@
 
 import { Messages } from '@salesforce/core';
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
-import { uploadContentVersion } from '../../../../common/fileUtils.js';
-import { ContentVersion } from '../../../../common/typeDefs.js';
+import { uploadContentVersion } from '../../../../common/contentVersionUtils.js';
+import { ContentVersion } from '../../../../common/contentVersionTypes.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-chipps-data', 'chipps.data.file.upload');

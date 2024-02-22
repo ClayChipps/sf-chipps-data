@@ -10,7 +10,7 @@ import path from 'node:path';
 import FormData from 'form-data';
 import got from 'got';
 import { Connection } from '@salesforce/core';
-import { ContentVersionCreateRequest, ContentVersion, CreateResult } from './typeDefs.js';
+import { ContentVersionCreateRequest, ContentVersion, ContentVersionCreateResult } from './contentVersionTypes.js';
 
 export async function uploadContentVersion(
   targetOrgConnection: Connection,
@@ -31,7 +31,7 @@ export async function uploadContentVersion(
   form.append('entity_content', JSON.stringify(contentVersionCreateRequest), { contentType: 'application/json' });
   form.append('VersionData', fs.createReadStream(pathOnClient), { filename: path.basename(pathOnClient) });
 
-  const data: CreateResult = await got.post(`${targetOrgConnection.baseUrl()}/sobjects/ContentVersion`, {
+  const data: ContentVersionCreateResult = await got.post(`${targetOrgConnection.baseUrl()}/sobjects/ContentVersion`, {
     body: form,
     headers: {
       Authorization: `Bearer ${targetOrgConnection.accessToken}`,

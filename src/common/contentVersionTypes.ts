@@ -18,7 +18,7 @@ export interface ContentVersionCreateRequest {
   Title?: string;
 }
 
-export interface CreateResult {
+export interface ContentVersionCreateResult {
   id: string;
   success: boolean;
   errors: string[];
@@ -26,7 +26,7 @@ export interface CreateResult {
   message: string;
 }
 
-export type FileToUpload = {
+export type ContentVersionToUpload = {
   ContentDocumentId?: string;
   Error?: string;
   FirstPublishLocationId?: string;

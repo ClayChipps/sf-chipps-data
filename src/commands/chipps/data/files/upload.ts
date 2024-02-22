@@ -11,8 +11,8 @@ import { createObjectCsvWriter } from 'csv-writer';
 import PQueue from 'p-queue';
 import { Messages } from '@salesforce/core';
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
-import { uploadContentVersion } from '../../../../common/fileUtils.js';
-import { FileToUpload } from '../../../../common/typeDefs.js';
+import { uploadContentVersion } from '../../../../common/contentVersionUtils.js';
+import { ContentVersionToUpload } from '../../../../common/contentVersionTypes.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-chipps-data', 'chipps.data.files.upload');
@@ -89,19 +89,19 @@ export default class DataFilesUpload extends SfCommand<void> {
 
     for await (const record of parser) {
       void fileQueue.add(async () => {
-        const fileToUpload = record as FileToUpload;
+        const contentVersionToUpload = record as ContentVersionToUpload;
         try {
           const contentVersion = await uploadContentVersion(
             targetOrgConnection,
-            fileToUpload.PathOnClient,
-            fileToUpload.Title,
-            fileToUpload.FirstPublishLocationId
+            contentVersionToUpload.PathOnClient,
+            contentVersionToUpload.Title,
+            contentVersionToUpload.FirstPublishLocationId
           );
-          fileToUpload.ContentDocumentId = contentVersion.ContentDocumentId;
-          await successWriter.writeRecords([fileToUpload]);
+          contentVersionToUpload.ContentDocumentId = contentVersion.ContentDocumentId;
+          await successWriter.writeRecords([contentVersionToUpload]);
         } catch (error) {
-          fileToUpload.Error = error as string;
-          await errorWriter.writeRecords([fileToUpload]);
+          contentVersionToUpload.Error = error as string;
+          await errorWriter.writeRecords([contentVersionToUpload]);
         }
       });
     }

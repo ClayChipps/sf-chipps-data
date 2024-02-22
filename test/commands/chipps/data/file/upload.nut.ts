@@ -9,7 +9,7 @@ import path from 'node:path';
 import { expect } from 'chai';
 import { execCmd, TestSession } from '@salesforce/cli-plugins-testkit';
 import { Duration } from '@salesforce/kit';
-import { ContentVersion } from './../../../../../src/common/typeDefs.js';
+import { ContentVersion } from './../../../../../src/common/contentVersionTypes.js';
 
 describe('chipps data files upload', () => {
   let session: TestSession;

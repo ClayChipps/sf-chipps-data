@@ -12,7 +12,7 @@ import got from 'got';
 import { Connection, SfError } from '@salesforce/core';
 import { MockTestOrgData, TestContext } from '@salesforce/core/lib/testSetup.js';
 import DataFilesUpload from '../../../../../src/commands/chipps/data/files/upload.js';
-import { FileToUpload } from '../../../../../src/common/typeDefs.js';
+import { ContentVersionToUpload } from '../../../../../src/common/contentVersionTypes.js';
 
 describe('chipps data files upload', () => {
   const $$ = new TestContext();
@@ -54,8 +54,11 @@ describe('chipps data files upload', () => {
       testOrg.username,
     ]);
 
-    const errorResults = parse(fs.readFileSync('error.csv'), { bom: true, columns: true }) as FileToUpload[];
-    const successResults = parse(fs.readFileSync('success.csv'), { bom: true, columns: true }) as FileToUpload[];
+    const errorResults = parse(fs.readFileSync('error.csv'), { bom: true, columns: true }) as ContentVersionToUpload[];
+    const successResults = parse(fs.readFileSync('success.csv'), {
+      bom: true,
+      columns: true,
+    }) as ContentVersionToUpload[];
 
     expect(errorResults[0].Error).to.contain('Error: ENOENT: no such file or directory');
     expect(successResults).to.deep.equal([
